@@ -210,7 +210,8 @@ do_resize:
 
 		for (i = 0; i < max_choice; i++) {
 			item_set(i + scroll);
-			if (toupper(key) == toupper(item_str()[0]))
+			if (toupper((unsigned char)key) ==
+			    toupper((unsigned char)item_str()[0]))
 				break;
 		}
 

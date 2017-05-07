@@ -481,7 +481,8 @@ int dialog_inputbox(WINDOW *main_window,
 			cursor_form_win = min(cursor_position, prompt_width-1);
 			break;
 		default:
-			if ((isgraph(res) || isspace(res))) {
+			if ((isgraph((unsigned char)res) ||
+			    isspace((unsigned char)res))) {
 				/* one for new char, one for '\0' */
 				if (len+2 > *result_len) {
 					*result_len = len+2;

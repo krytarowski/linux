@@ -1034,7 +1034,8 @@ static int do_match(int key, struct match_state *state, int *ans)
 	} else if (!state->in_search)
 		return 1;
 
-	if (isalnum(c) || isgraph(c) || c == ' ') {
+	if (isalnum((unsigned char)c) || isgraph((unsigned char)c) ||
+	    c == ' ') {
 		state->pattern[strlen(state->pattern)] = c;
 		state->pattern[strlen(state->pattern)] = '\0';
 		adj_match_dir(&state->match_direction);

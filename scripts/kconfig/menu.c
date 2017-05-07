@@ -134,9 +134,9 @@ static struct property *menu_add_prop(enum prop_type type, char *prompt, struct 
 	prop->visible.expr = menu_check_dep(dep);
 
 	if (prompt) {
-		if (isspace(*prompt)) {
+		if (isspace((unsigned char)*prompt)) {
 			prop_warn(prop, "leading whitespace ignored");
-			while (isspace(*prompt))
+			while (isspace((unsigned char)*prompt))
 				prompt++;
 		}
 		if (current_entry->prompt && current_entry != &rootmenu)

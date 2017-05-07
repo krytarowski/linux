@@ -589,12 +589,12 @@ bool sym_string_valid(struct symbol *sym, const char *str)
 		ch = *str++;
 		if (ch == '-')
 			ch = *str++;
-		if (!isdigit(ch))
+		if (!isdigit((unsigned char)ch))
 			return false;
 		if (ch == '0' && *str != 0)
 			return false;
 		while ((ch = *str++)) {
-			if (!isdigit(ch))
+			if (!isdigit((unsigned char)ch))
 				return false;
 		}
 		return true;
@@ -603,7 +603,7 @@ bool sym_string_valid(struct symbol *sym, const char *str)
 			str += 2;
 		ch = *str++;
 		do {
-			if (!isxdigit(ch))
+			if (!isxdigit((unsigned char)ch))
 				return false;
 		} while ((ch = *str++));
 		return true;
@@ -921,7 +921,7 @@ const char *sym_expand_string_value(const char *in)
 		src++;
 
 		p = name;
-		while (isalnum(*src) || *src == '_')
+		while (isalnum((unsigned char)*src) || *src == '_')
 			*p++ = *src++;
 		*p = '\0';
 

@@ -910,7 +910,8 @@ static enum string_value_kind expr_parse_string(const char *str,
 	default:
 		return k_invalid;
 	}
-	return !errno && !*tail && tail > str && isxdigit(tail[-1])
+	return !errno && !*tail && tail > str &&
+	       isxdigit((unsigned char)tail[-1])
 	       ? kind : k_string;
 }
 

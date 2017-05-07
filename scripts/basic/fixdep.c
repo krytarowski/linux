@@ -242,7 +242,7 @@ static void parse_config_file(const char *p)
 	while ((p = strstr(p, "CONFIG_"))) {
 		p += 7;
 		q = p;
-		while (*q && (isalnum(*q) || *q == '_'))
+		while (*q && (isalnum((unsigned char)*q) || *q == '_'))
 			q++;
 		if (memcmp(q - 7, "_MODULE", 7) == 0)
 			r = q - 7;

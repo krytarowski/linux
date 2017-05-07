@@ -94,7 +94,7 @@ static char *conf_expand_value(const char *in)
 		strncat(res_value, in, src - in);
 		src++;
 		dst = name;
-		while (isalnum(*src) || *src == '_')
+		while (isalnum((unsigned char)*src) || *src == '_')
 			*dst++ = *src++;
 		*dst = 0;
 		sym = sym_lookup(name, 0);
@@ -152,7 +152,7 @@ static int conf_set_sym_val(struct symbol *sym, int def, int def_flags, char *p)
 		return 1;
 	case S_OTHER:
 		if (*p != '"') {
-			for (p2 = p; *p2 && !isspace(*p2); p2++)
+			for (p2 = p; *p2 && !isspace((unsigned char)*p2); p2++)
 				;
 			sym->type = S_STRING;
 			goto done;
@@ -617,7 +617,8 @@ tristate_print_symbol(FILE *fp, struct symbol *sym, const char *value, void *arg
 {
 
 	if (sym->type == S_TRISTATE && *value != 'n')
-		fprintf(fp, "%s%s=%c\n", CONFIG_, sym->name, (char)toupper(*value));
+		fprintf(fp, "%s%s=%c\n", CONFIG_, sym->name,
+			(char)toupper((unsigned char)*value));
 }
 
 static struct conf_printer tristate_printer_cb =
@@ -910,7 +911,7 @@ static int conf_split_config(void)
 		s = sym->name;
 		d = path;
 		while ((c = *s++)) {
-			c = tolower(c);
+			c = tolower((unsigned char)c);
 			*d++ = (c == '_') ? '/' : c;
 		}
 		strcpy(d, ".h");

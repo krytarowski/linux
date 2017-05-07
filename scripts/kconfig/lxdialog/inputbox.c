@@ -194,7 +194,8 @@ do_resize:
 				}
 				continue;
 			default:
-				if (key < 0x100 && isprint(key)) {
+				if (key < 0x100 &&
+				    isprint((unsigned char)key)) {
 					if (len < MAX_LEN) {
 						wattrset(dialog, dlg.inputbox.atr);
 						if (pos < len) {

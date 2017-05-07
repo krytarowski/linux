@@ -534,14 +534,15 @@ int first_alpha(const char *string, const char *exempt)
 	int i, in_paren = 0, c;
 
 	for (i = 0; i < strlen(string); i++) {
-		c = tolower(string[i]);
+		c = tolower((unsigned char)string[i]);
 
 		if (strchr("<[(", c))
 			++in_paren;
 		if (strchr(">])", c) && in_paren > 0)
 			--in_paren;
 
-		if ((!in_paren) && isalpha(c) && strchr(exempt, c) == 0)
+		if ((!in_paren) && isalpha((unsigned char)c) &&
+		    strchr(exempt, c) == 0)
 			return i;
 	}
 

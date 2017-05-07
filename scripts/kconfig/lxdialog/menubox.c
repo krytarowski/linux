@@ -282,8 +282,8 @@ do_resize:
 	while (key != KEY_ESC) {
 		key = wgetch(menu);
 
-		if (key < 256 && isalpha(key))
-			key = tolower(key);
+		if (key < 256 && isalpha((unsigned char)key))
+			key = tolower((unsigned char)key);
 
 		if (strchr("ynmh", key))
 			i = max_choice;
@@ -291,14 +291,17 @@ do_resize:
 			for (i = choice + 1; i < max_choice; i++) {
 				item_set(scroll + i);
 				j = first_alpha(item_str(), "YyNnMmHh");
-				if (key == tolower(item_str()[j]))
+				if (key ==
+				    tolower((unsigned char)item_str()[j]))
 					break;
 			}
 			if (i == max_choice)
 				for (i = 0; i < max_choice; i++) {
 					item_set(scroll + i);
 					j = first_alpha(item_str(), "YyNnMmHh");
-					if (key == tolower(item_str()[j]))
+					if (key ==
+					    tolower((unsigned char)
+						    item_str()[j]))
 						break;
 				}
 		}
